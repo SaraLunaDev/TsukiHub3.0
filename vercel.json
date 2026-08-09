@@ -1,13 +1,16 @@
 {
-	"$schema": "https://openapi.vercel.sh/vercel.json",
-	"rewrites": [
+	"version": 2,
+	"routes": [
 		{
-			"source": "/assets/(.*)",
-			"destination": "/api/_assets/$1"
+			"handle": "filesystem"
 		},
 		{
-			"source": "/:path((?!api/|assets/).*)",
-			"destination": "/index.html"
+			"src": "/assets/(.*)",
+			"dest": "/api/_assets/$1"
+		},
+		{
+			"src": "/(.*)",
+			"dest": "/index.html"
 		}
 	]
 }
