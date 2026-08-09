@@ -1,31 +1,13 @@
 {
-	"version": 2,
+	"$schema": "https://openapi.vercel.sh/vercel.json",
 	"rewrites": [
 		{
 			"source": "/assets/(.*)",
-			"destination": "https://api.tsuki-hub.com/assets/$1"
-		}
-	],
-	"routes": [
-		{
-			"src": "/favicon.ico",
-			"dest": "/favicon.ico"
+			"destination": "/api/_assets/$1"
 		},
 		{
-			"src": "/api/(.*)",
-			"dest": "/api/$1"
-		},
-		{
-			"src": "/static/(.*)",
-			"dest": "/static/$1"
-		},
-		{
-			"src": "/img/(.*)",
-			"dest": "/img/$1"
-		},
-		{
-			"src": "/(.*)",
-			"dest": "/index.html"
+			"source": "/(.*)",
+			"destination": "/index.html"
 		}
 	]
 }
