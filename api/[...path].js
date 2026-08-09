@@ -1,7 +1,6 @@
 const API_BASE_URL = (process.env.API_BASE_URL || "").replace(/\/$/, "");
 const API_KEY = process.env.API_KEY;
-
-const ASSETS_PREFIX = "/api/_assets";
+const PROXY_QUERY_KEY = "__p";
 
 function readBody(req) {
 	return new Promise((resolve) => {
@@ -12,12 +11,31 @@ function readBody(req) {
 	});
 }
 
-function buildUpstreamUrl(req) {
-	if (req.url.startsWith(ASSETS_PREFIX)) {
-		return `${API_BASE_URL}/assets${req.url.slice(ASSETS_PREFIX.length)}`;
-	}
+function getOriginalPath(req) {
+	return req.query && req.query[PROXY_QUERY_KEY]
+		? req.query[PROXY_QUERY_KEY]
+		: req.url;
+}
 
-	return `${API_BASE_URL}${req.url.replace(/^\/api/, "")}`;
+function buildUpstreamUrl(req) {
+	const originalPath = getOriginalPath(req);
+	const upstreamPath = originalPath.startsWith("/api")
+		? originalPath.replace(/^\/api/, "")
+		: originalPath;
+
+	const qs = req.query
+		? Object.entries(req.query)
+				.filter(([k]) => k !== PROXY_QUERY_KEY)
+				.map(
+					([k, v]) =>
+						`${k}=${encodeURIComponent(
+							Array.isArray(v) ? v.join(",") : v,
+						)}`,
+				)
+				.join("&")
+		: "";
+
+	return `${API_BASE_URL}${upstreamPath}${qs ? `?${qs}` : ""}`;
 }
 
 export default async function handler(req, res) {
@@ -29,12 +47,16 @@ export default async function handler(req, res) {
 			return;
 		}
 
+		const originalPath = getOriginalPath(req);
 		const headers = { "X-API-Key": API_KEY };
 
 		if (req.headers["x-user-token"]) {
 			headers["X-User-Token"] = req.headers["x-user-token"];
 		}
-		if (req.headers.authorization && req.url.startsWith("/api/auth/")) {
+		if (
+			req.headers.authorization &&
+			originalPath.startsWith("/api/auth/")
+		) {
 			headers["Authorization"] = req.headers.authorization;
 		}
 

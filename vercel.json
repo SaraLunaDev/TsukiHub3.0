@@ -5,16 +5,12 @@
 			"handle": "filesystem"
 		},
 		{
-			"src": "/api/_assets/(.*)",
-			"dest": "/api/_assets/$1"
-		},
-		{
 			"src": "/api/(.*)",
-			"dest": "/api/$1"
+			"dest": "/api/[...path]?__p=/$1"
 		},
 		{
 			"src": "/assets/(.*)",
-			"dest": "/api/_assets/$1"
+			"dest": "/api/[...path]?__p=/assets/$1"
 		},
 		{
 			"src": "/(.*)",
