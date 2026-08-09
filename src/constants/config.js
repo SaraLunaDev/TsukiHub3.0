@@ -6,7 +6,7 @@ export const API_URLS = {
 };
 
 export const TWITCH_CONFIG = {
-	CLIENT_ID: "***REMOVED***",
+	CLIENT_ID: process.env.REACT_APP_TWITCH_CLIENT_ID,
 	REDIRECT_URI: window.location.origin,
 	SCOPES: ["user:read:email"],
 };

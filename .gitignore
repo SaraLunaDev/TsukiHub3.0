@@ -147,3 +147,6 @@ dist
 
 # Referencias
 refe/
+server.js
+package-lock.json
+package.json
