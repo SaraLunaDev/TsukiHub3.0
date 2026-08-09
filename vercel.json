@@ -6,7 +6,7 @@
 			"destination": "/api/_assets/$1"
 		},
 		{
-			"source": "/(.*)",
+			"source": "/:path((?!api/|assets/).*)",
 			"destination": "/index.html"
 		}
 	]
