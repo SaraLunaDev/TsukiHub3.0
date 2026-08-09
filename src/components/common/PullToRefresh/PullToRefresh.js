@@ -22,6 +22,15 @@ export default function PullToRefresh({ children }) {
 		(e) => {
 			if (phase === "refreshing") return;
 			if (window.scrollY > 0) return;
+			if (
+				e.target &&
+				typeof e.target.closest === "function" &&
+				e.target.closest("[data-pull-to-refresh='disabled']")
+			) {
+				startYRef.current = null;
+				pullingRef.current = false;
+				return;
+			}
 			startYRef.current = e.touches[0].clientY;
 			pullingRef.current = false;
 		},

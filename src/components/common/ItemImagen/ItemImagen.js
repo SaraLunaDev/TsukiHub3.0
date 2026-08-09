@@ -6,7 +6,10 @@ import "./ItemImagen.css";
 import { MaterialSymbolsLightKidStar } from "../../icons/MaterialSymbolsLightKidStar";
 import { MaterialSymbolsClose } from "../../icons/MaterialSymbolsClose";
 import { MaterialSymbolsEdit } from "../../icons/MaterialSymbolsEdit";
+import { IconamoonInformationCircleBold } from "../../icons/IconamoonInformationCircleBold";
 import { useAuth } from "../../../hooks/useAuth";
+
+const VerItem = React.lazy(() => import("../../pages/VerItem/VerItem"));
 
 export default function ItemImagen({
 	Imagen,
@@ -33,8 +36,11 @@ export default function ItemImagen({
 	const navigate = useNavigate();
 	const { isAdmin, token } = useAuth();
 	const [deleting, setDeleting] = useState(false);
+	const [showVerItem, setShowVerItem] = useState(false);
 
 	if (!Imagen) return null;
+
+	const isJuegos = window.location.pathname.includes("/juegos");
 
 	let nombrePrincipal = Nombre ? Nombre.replace(/\s*\[[^\]]*\]$/, "") : "";
 	let nombreSecundario = null;
@@ -48,9 +54,13 @@ export default function ItemImagen({
 
 	const handleEdit = (e) => {
 		e.stopPropagation();
-		const isJuegos = window.location.pathname.includes("/juegos");
 		const editPath = isJuegos ? "/juegos/editar/" : "/pelis/editar/";
 		navigate(`${editPath}${itemId}`);
+	};
+
+	const handleVerMas = (e) => {
+		if (e?.stopPropagation) e.stopPropagation();
+		setShowVerItem(true);
 	};
 
 	const handleDelete = async (e) => {
@@ -83,7 +93,8 @@ export default function ItemImagen({
 	};
 
 	return (
-		<div className="item-imagen-wrapper">
+		<>
+			<div className="item-imagen-wrapper">
 			{isAdmin && itemId && (
 				<button
 					className="item-imagen-edit-btn"
@@ -216,20 +227,31 @@ export default function ItemImagen({
 								gap: 8,
 							}}
 						>
-							{Trailer && (
-								<button
-									className="item-imagen-trailer-btn"
-									onClick={(e) => {
-										e.stopPropagation();
-										window.open(Trailer, "_blank");
-									}}
-								>
-									<MaterialSymbolsPlayArrowRounded
-										style={{ fontSize: 18, marginRight: 4 }}
-									/>
-									Ver Trailer
-								</button>
-							)}
+						{itemId && (
+							<button
+								className="item-imagen-trailer-btn"
+								onClick={handleVerMas}
+							>
+								<IconamoonInformationCircleBold
+									style={{ fontSize: 16, marginRight: 4 }}
+								/>
+								Ver más
+							</button>
+						)}
+						{Trailer && (
+							<button
+								className="item-imagen-trailer-btn"
+								onClick={(e) => {
+									e.stopPropagation();
+									window.open(Trailer, "_blank");
+								}}
+							>
+								<MaterialSymbolsPlayArrowRounded
+									style={{ fontSize: 18, marginRight: 4 }}
+								/>
+								Ver Trailer
+							</button>
+						)}
 							<span className="item-imagen-nota-global">
 								<MaterialSymbolsLightKidStar
 									className="item-imagen-nota-estrella"
@@ -281,15 +303,52 @@ export default function ItemImagen({
 					</footer>
 				</div>
 				{Caratula && (
-					<div className="item-imagen-caratula-container">
-						<img
-							src={Caratula}
-							alt="Carátula"
-							className="item-imagen-caratula"
-						/>
-					</div>
-				)}
-			</div>
+					<div className="item-imagen-caratula-container">					<img
+						src={Caratula}
+						alt="Carátula"
+						className="item-imagen-caratula"
+					/>
+				</div>
+			)}
 		</div>
+		</div>
+		{showVerItem && (
+			<React.Suspense
+				fallback={
+					<div
+						style={{
+							position: "fixed",
+							inset: 0,
+							zIndex: 9999,
+							background: "rgba(0,0,0,0.78)",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<div
+							style={{
+								background: "var(--row-bg)",
+								borderRadius: 12,
+								padding: 48,
+								border: "1px solid var(--border)",
+								textAlign: "center",
+								color: "var(--text-2)",
+								fontSize: 14,
+							}}
+						>
+							Cargando...
+						</div>
+					</div>
+				}
+			>
+				<VerItem
+					id={itemId}
+					isJuegos={isJuegos}
+					onClose={() => setShowVerItem(false)}
+				/>
+			</React.Suspense>
+		)}
+		</>
 	);
 }

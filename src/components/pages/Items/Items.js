@@ -68,6 +68,7 @@ function Items({ config }) {
 	useEffect(() => {
 		if (maxLenRef.current <= 1) return;
 		const timer = setInterval(() => {
+			if (document.querySelector(".veritem-modal-overlay")) return;
 			setNowIndex((i) => (i >= maxLenRef.current - 1 ? 0 : i + 1));
 			setPlanIndex((i) => (i >= maxLenRef.current - 1 ? 0 : i + 1));
 		}, 10000);
