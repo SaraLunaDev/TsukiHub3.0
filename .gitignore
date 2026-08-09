@@ -150,3 +150,6 @@ refe/
 server.js
 package-lock.json
 package.json
+
+# Configuracion local del editor (no subir)
+.vscode/
