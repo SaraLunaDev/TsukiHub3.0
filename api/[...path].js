@@ -17,11 +17,13 @@ function getOriginalPath(req) {
 		: req.url;
 }
 
+function stripApiPrefix(path) {
+	return path.startsWith("/api") ? path.replace(/^\/api/, "") : path;
+}
+
 function buildUpstreamUrl(req) {
 	const originalPath = getOriginalPath(req);
-	const upstreamPath = originalPath.startsWith("/api")
-		? originalPath.replace(/^\/api/, "")
-		: originalPath;
+	const upstreamPath = stripApiPrefix(originalPath);
 
 	const qs = req.query
 		? Object.entries(req.query)
@@ -55,7 +57,7 @@ export default async function handler(req, res) {
 		}
 		if (
 			req.headers.authorization &&
-			originalPath.startsWith("/api/auth/")
+			stripApiPrefix(originalPath).startsWith("/auth/")
 		) {
 			headers["Authorization"] = req.headers.authorization;
 		}
