@@ -1,0 +1,74 @@
+.loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--dark);
+	z-index: 999;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	transition: opacity 0.4s ease;
+}
+
+.loading-screen-hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.loading-screen-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	margin-top: 80px;
+	text-align: center;
+	padding: 24px;
+}
+
+.loading-ring {
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+.loading-screen-error-icon {
+	font-size: 40px;
+}
+
+.loading-screen-error p {
+	font-size: 16px;
+	color: var(--text-2);
+	max-width: 360px;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.loading-screen-retry-btn {
+	margin-top: 4px;
+	padding: 6px 16px;
+	background: var(--button);
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: var(--font-main);
+}
+
+.loading-screen-retry-btn:hover {
+	background: var(--button-3d);
+}
+
+@media (max-width: 600px) {
+	.loading-screen {
+		top: 0px;
+		bottom: 74px;
+		align-items: center;
+	}
+
+	.loading-screen-error {
+		margin-top: 0;
+	}
+}

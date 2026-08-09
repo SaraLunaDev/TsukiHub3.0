@@ -1,0 +1,296 @@
+.user-menu {
+	position: relative;
+}
+
+.user-menu-button {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+}
+
+.user-menu-avatar-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.user-menu-role-badge {
+	position: absolute;
+	bottom: -4px;
+	right: -5px;
+	width: 16px;
+	height: 16px;
+	pointer-events: none;
+	filter: drop-shadow(1.5px 0 0 var(--navbar))
+		drop-shadow(-1.5px 0 0 var(--navbar))
+		drop-shadow(0 1.5px 0 var(--navbar))
+		drop-shadow(0 -1.5px 0 var(--navbar));
+}
+
+.user-menu-role-badge--admin {
+	color: #f59e0b;
+}
+
+.user-menu-role-badge--mod {
+	color: #22c55e;
+}
+
+.user-menu-avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.user-menu-icon {
+	font-size: 24px;
+	color: var(--text);
+}
+
+.user-menu-loading {
+	color: var(--text-2);
+	font-size: 14px;
+}
+
+.user-menu-dropdown {
+	position: fixed;
+	top: 64px;
+	right: max(0px, calc((100vw - 1300px) / 2));
+	bottom: auto;
+	min-width: 250px;
+	padding-top: 12px;
+	background-color: var(--navbar);
+	border-radius: 0 0 8px 8px;
+	box-shadow:
+		0 10px 20px -10px rgba(0, 0, 0, 0.25),
+		-10px 10px 20px -10px rgba(0, 0, 0, 0.25),
+		10px 10px 20px -10px rgba(0, 0, 0, 0.25);
+	z-index: -1;
+	transition:
+		opacity 0.15s ease,
+		transform 0.15s ease;
+	border-top: none;
+	border-bottom: 1px solid rgba(160, 168, 178, 0.25);
+	border-left: 1px solid rgba(160, 168, 178, 0.25);
+	border-right: 1px solid rgba(160, 168, 178, 0.25);
+}
+
+body:not(.dark-mode) .user-menu-dropdown {
+	border-bottom-color: rgba(102, 102, 102, 0.25);
+	border-left-color: rgba(102, 102, 102, 0.25);
+	border-right-color: rgba(102, 102, 102, 0.25);
+}
+
+.user-menu-options {
+	padding: 0;
+	padding-bottom: 8px;
+}
+
+.user-menu-profile-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 12px;
+	background-color: transparent;
+	color: var(--text);
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	margin-bottom: 8px;
+	text-align: left;
+}
+
+body:not(.dark-mode) .user-menu-profile-button {
+	border-bottom-color: rgba(102, 102, 102, 0.5);
+}
+
+.user-menu-option-divider {
+	padding-top: 18px !important;
+	margin-top: 8px !important;
+	border-top: 1px solid rgba(160, 168, 178, 0.25) !important;
+}
+
+body:not(.dark-mode) .user-menu-option-divider {
+	border-top-color: rgba(102, 102, 102, 0.25) !important;
+}
+
+.user-menu-profile-button:active {
+	transform: none;
+	background-color: var(--mid-2);
+}
+
+.user-menu-profile-avatar-wrapper {
+	position: relative;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.user-menu-profile-avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.user-menu-profile-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	flex: 1;
+}
+
+.user-menu-profile-name {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.user-menu-profile-link {
+	font-size: 11px;
+	color: var(--text-2);
+}
+
+.user-menu-option {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 12px;
+	background-color: transparent;
+	color: var(--text);
+	border: none;
+	border-radius: 0;
+	font-size: 14px;
+	cursor: pointer;
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.user-menu-option:last-child {
+	margin-bottom: 0;
+}
+
+.user-menu-option:active {
+	transform: none;
+	background-color: var(--mid-2);
+}
+
+.user-menu-option-primary {
+	color: var(--text);
+}
+
+.user-menu-option-primary:active {
+	background-color: var(--mid-2);
+}
+
+.user-menu-option-danger {
+	color: var(--text);
+}
+
+.user-menu-option-danger:active {
+	background-color: var(--mid-2);
+}
+
+.user-menu-option-icon {
+	font-size: 18px;
+	min-width: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.user-menu-twitch-icon {
+	color: #6441a5;
+}
+
+.user-menu-option-text {
+	flex: 1;
+	font-weight: 500;
+}
+
+.user-menu-option-theme {
+	display: none;
+}
+
+@media (max-width: 600px) {
+	.user-menu-dropdown {
+		position: fixed;
+		bottom: 70px;
+		left: 0;
+		right: 0;
+		top: auto;
+		min-width: unset;
+		background-color: var(--navbar);
+		border-radius: 16px 16px 0 0;
+		box-shadow: 0 -10px 20px -10px rgba(0, 0, 0, 0.4);
+		z-index: -1;
+		overflow: hidden;
+		border-top: 1px solid rgba(160, 168, 178, 0.25);
+		border-bottom: none;
+		border-left: none;
+		border-right: none;
+		padding-top: 8px;
+	}
+
+	body:not(.dark-mode) .user-menu-dropdown {
+		border-top-color: rgba(102, 102, 102, 0.25);
+	}
+
+	.user-menu-icon {
+		font-size: 28px;
+		color: var(--text-2);
+	}
+
+	.user-menu-profile-button {
+		padding: 14px 16px;
+	}
+
+	.user-menu-profile-avatar-wrapper {
+		width: 40px;
+		height: 40px;
+	}
+
+	.user-menu-profile-avatar {
+		width: 40px;
+		height: 40px;
+	}
+
+	.user-menu-profile-name {
+		font-size: 14px;
+	}
+
+	.user-menu-profile-link {
+		font-size: 12px;
+	}
+
+	.user-menu-option {
+		padding: 14px 16px;
+		font-size: 16px;
+	}
+
+	.user-menu-option-icon {
+		font-size: 22px;
+		min-width: 28px;
+	}
+
+	.user-menu-option-theme {
+		display: flex;
+	}
+}

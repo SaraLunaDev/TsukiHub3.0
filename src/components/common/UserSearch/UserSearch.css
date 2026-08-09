@@ -1,0 +1,76 @@
+.user-search-mobile-only .user-search-container {
+	margin-bottom: 0 !important;
+}
+
+.user-search-mobile-only {
+	display: none;
+}
+
+.user-search-container {
+	position: relative;
+	display: none;
+}
+
+.user-search-container-top {
+	position: relative;
+	width: 240px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.user-search-container-top .search-input-field {
+	height: 28px;
+	font-size: 12px;
+	padding: 4px 8px 4px 32px;
+}
+
+.user-search-container-top .search-icon {
+	left: 8px;
+}
+
+.user-pfp-large {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 8px;
+}
+
+.user-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background-color: var(--item);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	margin-top: 4px;
+	max-height: 300px;
+	overflow-y: auto;
+	z-index: 100;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.user-dropdown-item {
+	padding: 10px 15px;
+	cursor: pointer;
+	color: var(--text);
+	transition: background-color 0.2s;
+}
+
+.user-dropdown-item:hover {
+	background-color: var(--dark-2);
+}
+
+.loading {
+	text-align: center;
+	padding: 40px;
+	font-size: 1.2rem;
+	color: var(--text-2);
+}
+
+.ranking-data {
+	padding: 10px;
+	margin-bottom: 16px;
+}

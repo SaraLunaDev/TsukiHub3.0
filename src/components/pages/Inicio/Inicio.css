@@ -1,0 +1,51 @@
+.platino-avatar-wrapper {
+	position: relative;
+	display: inline-block;
+	margin-left: 2px;
+	margin-right: 4px;
+}
+
+.platino-diamond-badge {
+	position: absolute;
+	bottom: -4px;
+	right: -10px;
+	width: 20px;
+	height: 20px;
+	color: #e006b9;
+	pointer-events: none;
+}
+
+.inicio-container {
+	padding: 15px;
+	max-width: 1300px;
+	margin: 0 auto;
+}
+
+.inicio-container p {
+	font-size: 14px;
+	color: var(--text-2);
+	line-height: 1.6;
+}
+
+.table-markdown-wrapper {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.table-markdown-wrapper .table-markdown {
+	padding: 0;
+	width: 100%;
+	margin-top: -10px;
+}
+
+@media (max-width: 600px) {
+	.inicio-container {
+		padding: 20px;
+	}
+
+	.inicio-container p {
+		font-size: 16px;
+	}
+}

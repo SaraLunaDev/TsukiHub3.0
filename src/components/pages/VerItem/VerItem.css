@@ -1,0 +1,670 @@
+.veritem-modal-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.78);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+}
+
+.veritem-modal-container {
+	width: 100%;
+	max-width: 1100px;
+	max-height: 90vh;
+	overflow-y: auto;
+	background: var(--row-bg);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+	position: relative;
+}
+
+.veritem-modal-close {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	background: var(--button);
+	color: var(--text);
+	cursor: pointer;
+	font-size: 18px;
+	transition: all 0.2s ease;
+}
+
+.veritem-modal-close:hover {
+	background: var(--button-3d);
+	transform: scale(1.05);
+}
+
+.veritem-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	min-height: 48px;
+}
+
+.veritem-banner {
+	position: relative;
+	width: 100%;
+	height: 222px;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #222;
+}
+
+.veritem-banner-bg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.veritem-banner-overlay {
+	position: absolute;
+	inset: 0;
+	background: var(--row-bg);
+	opacity: 0.9;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	pointer-events: none;
+}
+
+.veritem-banner-content {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+	padding: 14px;
+	box-sizing: border-box;
+}
+
+.veritem-banner-main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 0;
+}
+
+.veritem-banner-header {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+}
+
+.veritem-banner-title {
+	color: var(--text);
+	font-size: 1.35em;
+	font-weight: 700;
+	width: 100%;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0;
+}
+
+.veritem-banner-subtitle {
+	color: var(--color-mid);
+	margin-top: 6px;
+	text-align: left;
+	font-size: 15px;
+}
+
+.veritem-banner-footer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	margin-top: 8px;
+	pointer-events: auto;
+}
+
+.veritem-banner-genres {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.veritem-banner-genre {
+	background: var(--genero);
+	color: var(--text);
+	font-size: 14px;
+	padding: 6px 14px;
+	border-radius: 6px;
+	border: 1px solid var(--border);
+	white-space: nowrap;
+	height: 34px;
+	display: flex;
+	align-items: center;
+}
+
+.veritem-banner-notas {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+.veritem-banner-nota {
+	display: flex;
+	align-items: flex-end;
+	gap: 8px;
+	background: var(--item);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 6px 12px;
+	height: 34px;
+}
+
+.veritem-banner-star {
+	font-size: 18px;
+	color: #fbbf24;
+}
+
+.veritem-banner-nota-val {
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.veritem-banner-nota-src {
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--text-2);
+	line-height: 1.2;
+}
+
+.veritem-banner-cover-wrapper {
+	display: flex;
+	align-items: flex-start;
+	height: 100%;
+	margin-left: 16px;
+	pointer-events: none;
+}
+
+.veritem-banner-cover {
+	height: 100%;
+	aspect-ratio: 2/3;
+	object-fit: cover;
+	border-radius: 6px;
+	border: 1px solid var(--border);
+	pointer-events: none;
+}
+
+.veritem-tabs-section {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+}
+
+.veritem-tabs {
+	display: flex;
+	gap: 4px;
+}
+
+.veritem-tab {
+	flex: 1;
+	min-width: 0;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	color: var(--text-2);
+	cursor: pointer;
+	position: relative;
+	padding: 0 8px;
+	transition: color 0.2s;
+	font-size: 13px;
+	font-weight: 600;
+	font-family: var(--font-main);
+}
+
+.veritem-tab span {
+	position: relative;
+	z-index: 1;
+}
+
+.veritem-tab span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -10px;
+	height: 2px;
+	background-color: var(--color-mid);
+	border-radius: 2px;
+	opacity: 0;
+	transform: scaleX(0);
+	transition:
+		opacity 0.2s,
+		transform 0.2s;
+	pointer-events: none;
+}
+
+.veritem-tab:hover {
+	color: var(--text);
+}
+
+.veritem-tab:hover span::after {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+.veritem-tab.active {
+	color: var(--text);
+}
+
+.veritem-tab.active span::after {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+.veritem-header + .inset-section + .inset-section {
+	margin-top: 12px;
+}
+
+.veritem-content-grid {
+	display: grid;
+	grid-template-columns: 1.6fr 1fr;
+	gap: 20px;
+	align-items: stretch;
+}
+
+@media (max-width: 900px) {
+	.veritem-content-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.veritem-left {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+.veritem-tab-content {
+	flex: 1;
+	min-height: 0;
+	padding: 20px 8px 0 8px;
+}
+
+.veritem-tab-panel {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.veritem-tab-panel h2 {
+	font-size: 20px;
+	font-weight: 900;
+	margin: 0 0 12px 0;
+	color: var(--text);
+}
+
+.veritem-tab-panel h3 {
+	font-size: 14px;
+	font-weight: 700;
+	margin: 0 0 8px 0;
+	color: var(--text);
+}
+
+.veritem-tab-panel p {
+	font-size: 13px;
+	line-height: 1.7;
+	color: var(--text-2);
+	margin: 0;
+	white-space: pre-line;
+}
+
+.veritem-empty {
+	opacity: 0.6;
+	font-style: italic;
+}
+
+.veritem-comentarios > .veritem-empty {
+	margin-top: auto;
+}
+
+.veritem-enlaces {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 16px;
+}
+
+.veritem-video-section {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+	flex: 1 1 280px;
+	max-width: 360px;
+	min-width: 0;
+}
+
+.veritem-video-label {
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--text-2);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.veritem-video-embed {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #000;
+}
+
+.veritem-video-embed iframe {
+	width: 100%;
+	height: 100%;
+	border: none;
+	position: absolute;
+	inset: 0;
+}
+
+.veritem-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.veritem-sidebar-card {
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--item);
+	padding: 14px;
+}
+
+.veritem-sidebar-card h3 {
+	font-size: 14px;
+	font-weight: 700;
+	margin: 0 0 12px 0;
+	color: var(--text);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.veritem-info-list {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 13px;
+}
+
+.veritem-info-list dt {
+	color: var(--text-2);
+	font-weight: 400;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-bottom: 1px;
+}
+
+.veritem-info-list dd {
+	margin: 0;
+	color: var(--text);
+	font-weight: 500;
+}
+
+.veritem-info-user {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	white-space: nowrap;
+}
+
+.veritem-user-avatar-sm {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.veritem-info-date {
+	color: var(--text-2);
+	font-weight: 400;
+	font-size: 12px;
+}
+
+.veritem-info-link {
+	color: var(--color-mid);
+	text-decoration: none;
+	font-size: 12px;
+	word-break: break-all;
+}
+
+.veritem-info-link:hover {
+	text-decoration: underline;
+}
+
+.veritem-vote-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.veritem-vote-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 26px;
+	padding: 0 8px;
+	border-radius: 4px;
+	border: 1px solid var(--border);
+	background: var(--button);
+	color: var(--text);
+	font-size: 11px;
+	font-weight: 600;
+	cursor: pointer;
+	transition:
+		background 0.15s,
+		color 0.15s;
+	font-family: var(--font-main);
+}
+
+.veritem-vote-btn:hover {
+	background: var(--button-3d);
+}
+
+.veritem-vote-btn.voted {
+	background: var(--color-mid);
+	color: #fff;
+	border-color: var(--color-mid);
+}
+
+.veritem-vote-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.veritem-comentarios {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.veritem-comentarios-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+}
+
+.veritem-comentario-item {
+	display: flex;
+	gap: 10px;
+	padding: 10px 12px;
+	background: var(--item);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+}
+
+.veritem-comentario-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.veritem-comentario-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.veritem-comentario-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 4px;
+}
+
+.veritem-comentario-autor {
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.veritem-comentario-fecha {
+	font-size: 11px;
+	color: var(--text-2);
+	margin-left: auto;
+}
+
+.veritem-comentario-texto {
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--text-2);
+	margin: 0;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.veritem-comentario-form {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding-bottom: 8px;
+	margin-top: auto;
+}
+
+.veritem-comentario-input {
+	flex: 1;
+	height: 38px;
+	padding: 0 12px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--input);
+	color: var(--text);
+	font-size: 13px;
+	font-family: var(--font-main);
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.veritem-comentario-input:focus {
+	border-color: var(--color-mid);
+}
+
+.veritem-comentario-input:disabled {
+	opacity: 0.6;
+}
+
+.veritem-comentario-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 38px;
+	padding: 0 16px;
+	border: none;
+	border-radius: 6px;
+	background: var(--color-mid);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	font-family: var(--font-main);
+	cursor: pointer;
+	transition: opacity 0.15s;
+	white-space: nowrap;
+}
+
+.veritem-comentario-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.veritem-comentario-btn:hover:not(:disabled) {
+	opacity: 0.85;
+}
+
+.btn-back {
+	background-color: var(--button);
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-family: var(--font-main);
+	font-size: 0.9rem;
+	transition: all 0.2s ease;
+	box-shadow: var(--box-shadow);
+}
+
+.btn-back:hover {
+	background-color: var(--button-3d);
+	box-shadow: var(--box-shadow-inset);
+	transform: translateY(1px);
+}
+
+.btn-back:active {
+	transform: translateY(2px);
+	box-shadow: var(--box-shadow-inset);
+}
+
+@media (max-width: 600px) {
+	.veritem-banner {
+		height: 180px;
+	}
+
+	.veritem-banner-cover {
+		display: none;
+	}
+
+	.veritem-tab {
+		font-size: 12px;
+		height: 36px;
+	}
+
+	.veritem-sidebar-card {
+		padding: 10px;
+	}
+}

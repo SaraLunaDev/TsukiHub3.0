@@ -1,0 +1,292 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family:
+		"JetBrains Mono",
+		monospace,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		"Roboto",
+		"Oxygen",
+		"Ubuntu",
+		"Cantarell",
+		"Fira Sans",
+		"Droid Sans",
+		"Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--dark);
+	color: var(--text);
+	height: 100%;
+	overscroll-behavior-y: contain;
+}
+
+body.dark-mode {
+	background-color: var(--dark);
+	color: var(--text);
+}
+
+body:not(.dark-mode) {
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+code {
+	font-family:
+		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.inset-section {
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	box-shadow: var(--box-shadow-inset);
+	padding: 10px;
+	background: var(--row-bg);
+}
+
+.top-section {
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 4px;
+}
+
+.normal-section {
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	box-shadow: var(--box-shadow-inset);
+	background: var(--row-bg);
+	display: flex;
+	flex-direction: column;
+}
+
+.ranking {
+	padding: 12px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.ranking-content h3 {
+	margin: 0 0 6px 0;
+	font-size: 1.05em;
+}
+
+.ranking-content p {
+	margin: 0;
+	color: var(--text-2);
+}
+
+.top-section h2 {
+	margin: 0 0 6px 0;
+	font-size: 1.1em;
+	color: var(--text);
+}
+
+.top-section-h2-down {
+	font-weight: 500;
+	color: var(--text-2);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	font-size: 0.94em;
+}
+
+.main-container {
+	padding: 12px 0px;
+	max-width: 1300px;
+	margin: 0 auto;
+	height: auto;
+}
+
+.main-container h1 {
+	font-size: 24px;
+	margin-bottom: 15px;
+	color: var(--text);
+}
+
+.main-container p {
+	font-size: 14px;
+	color: var(--text-2);
+	line-height: 1.6;
+}
+
+.table-markdown {
+	font-family:
+		"JetBrains Mono",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		"Roboto",
+		"Oxygen",
+		"Ubuntu",
+		"Cantarell",
+		"Fira Sans",
+		"Droid Sans",
+		"Helvetica Neue",
+		sans-serif;
+	font-size: 15px;
+	color: var(--text-2);
+	background: var(--bg-2);
+	border-radius: 8px;
+	padding: 12px 16px;
+	margin: 0;
+	line-height: 1.7;
+}
+
+.table-markdown h1,
+.table-markdown h2,
+.table-markdown h3,
+.table-markdown h4,
+.table-markdown h5,
+.table-markdown h6 {
+	color: var(--text);
+	font-weight: 600;
+	margin: 12px 0 8px 0;
+	font-size: 1.1em;
+}
+
+.table-markdown ul,
+.table-markdown ol {
+	margin: 8px 0 8px 18px;
+	padding: 0 0 0 18px;
+	list-style: disc inside;
+}
+
+.table-markdown ul li,
+.table-markdown ol li {
+	margin-bottom: 6px !important;
+	color: var(--text-2) !important;
+	border: none !important;
+	font-size: 13px !important;
+	padding: 0 !important;
+	list-style: disc inside !important;
+	line-height: 1.4;
+}
+
+.table-markdown strong {
+	color: var(--text);
+}
+
+.table-markdown em {
+	color: var(--text-2);
+}
+
+.table-markdown hr {
+	border: none;
+	border-top: 1px solid var(--divider);
+	margin: 12px 0;
+}
+
+.table-markdown p {
+	margin: 10px 0 8px 0;
+	font-size: 13px;
+	color: var(--text-2);
+}
+
+.table-markdown a {
+	color: var(--text-url);
+	font-weight: 500;
+}
+
+.table-markdown ul ul,
+.table-markdown ol ol,
+.table-markdown ul ol,
+.table-markdown ol ul {
+	padding: 2px 12px 2px 16px;
+	font-size: 0.97em;
+}
+
+.table-markdown ul ul li,
+.table-markdown ol ol li,
+.table-markdown ul ol li,
+.table-markdown.ol ul li {
+	color: var(--text-2);
+	font-size: 13px;
+	margin-bottom: 4px !important;
+	background: none;
+	border: none;
+	position: relative;
+	list-style: none !important;
+	margin-left: 16px !important;
+}
+
+.table-markdown ul ul li::before,
+.table-markdown ol ol li::before,
+.table-markdown ul ol li::before,
+.table-markdown.ol ul li::before {
+	content: "\2023";
+	color: var(--text-2);
+	font-weight: bold;
+	position: absolute;
+	left: -1em;
+}
+
+html {
+	scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+th,
+td {
+	text-align: left;
+}
+
+@media (max-width: 600px) {
+	.main-container {
+		padding: 10px;
+	}
+
+	.main-container h1 {
+		font-size: 32px;
+		margin-bottom: 20px;
+	}
+
+	.main-container p {
+		font-size: 16px;
+	}
+
+	.hide-mobile {
+		display: none !important;
+	}
+}

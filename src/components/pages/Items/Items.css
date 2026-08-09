@@ -1,0 +1,50 @@
+.filter-toggle-mine-avatar,
+.filter-toggle-mine-icon {
+	filter: grayscale(100%);
+	transition: filter 0.25s ease;
+}
+
+.filter-toggle-mine-avatar.filter-toggle-mine-active,
+.filter-toggle-mine-icon.filter-toggle-mine-active {
+	filter: grayscale(0);
+}
+
+.items-grid,
+.pelis-grid,
+.juegos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	gap: 20px;
+	padding: 8px;
+}
+
+@media (max-width: 600px) {
+	.items-grid,
+	.pelis-grid,
+	.juegos-grid {
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	}
+}
+
+.past-scroll-container {
+	max-height: 70vh;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+}
+
+.past-scroll-container::-webkit-scrollbar {
+	width: 6px;
+}
+
+.past-scroll-container::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.past-scroll-container::-webkit-scrollbar-thumb {
+	background: var(--border, rgba(255, 255, 255, 0.15));
+	border-radius: 3px;
+}
+
+.past-scroll-container::-webkit-scrollbar-thumb:hover {
+	background: var(--text-2, rgba(255, 255, 255, 0.3));
+}

@@ -1,0 +1,262 @@
+.gacha-banner-buttons {
+	display: flex;
+	gap: 4px;
+	flex: 1;
+}
+
+.gacha-wrapper {
+	position: relative;
+}
+
+.gacha-data-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	max-width: 300px;
+}
+
+.gacha-data-container .top-section h2 {
+	display: flex;
+	align-items: center;
+}
+
+.gacha-container {
+	margin-left: 316px;
+	width: calc(100% - 316px);
+	display: flex;
+	flex-direction: column;
+}
+
+.gacha-top-controls {
+	display: flex;
+	gap: 16px;
+}
+
+.gacha-banner-button {
+	flex: 1;
+	min-width: 0;
+	height: 48px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 2px;
+	background: transparent;
+	border: none;
+	color: var(--text-2);
+	border-radius: 8px;
+	cursor: pointer;
+	position: relative;
+	text-decoration: none;
+	padding: 0 0 3px 0;
+	transition: color 0.2s;
+	opacity: 100%;
+}
+
+.gacha-banner-button::before {
+	display: none;
+}
+
+.gacha-banner-button .nav-icon {
+	display: none;
+}
+
+.gacha-banner-button .nav-text {
+	display: block;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.gacha-banner-button span {
+	position: relative;
+	z-index: 1;
+}
+
+.gacha-banner-button span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -7px;
+	height: 2px;
+	background-color: var(--color-mid);
+	border-radius: 2px;
+	opacity: 0;
+	transform: scaleX(0);
+	transition:
+		opacity 0.2s,
+		transform 0.2s;
+	pointer-events: none;
+}
+
+.gacha-banner-button:hover span::after {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+.gacha-banner-button.active {
+	color: var(--text);
+	opacity: 100%;
+}
+
+.gacha-banner-button.active span::after {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+.gacha-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+	gap: 8px;
+	padding: 4px;
+	max-width: 100%;
+	flex: 1;
+}
+
+.gacha-grid .gacha-card-skeleton {
+	width: 100%;
+	max-width: 82px;
+	aspect-ratio: 2/3;
+	background: var(--row-bg);
+	border: 1px solid transparent;
+	border-radius: 8px;
+	animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.gacha-grid .gacha-grid-loading-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--row-bg);
+	z-index: 2;
+	border-radius: 8px;
+}
+
+.gacha-grid .grid-loading-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 16px;
+	text-align: center;
+}
+
+.gacha-grid .grid-loading-error-icon {
+	font-size: 32px;
+}
+
+.gacha-grid .grid-loading-error p {
+	margin: 0;
+	color: var(--text-2);
+	font-size: 13px;
+	max-width: 240px;
+	line-height: 1.4;
+}
+
+.gacha-grid .gacha-tier-divider {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 12px 0 4px 0;
+}
+
+.gacha-grid .gacha-tier-divider hr {
+	flex: 1;
+	border: none;
+	border-top: 1px solid var(--border);
+	margin: 0;
+}
+
+.gacha-grid .gacha-tier-divider .gacha-tier-stars {
+	font-size: 13px;
+	color: var(--color-mid);
+	letter-spacing: 2px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+@keyframes skeleton-pulse {
+	0%,
+	100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.gacha-top-section {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.gacha-tier-grid h3 {
+	margin: 0 0 8px 0;
+	font-size: 18px;
+	color: var(--text);
+}
+
+@media (max-width: 600px) {
+	.gacha-wrapper {
+		flex-direction: column;
+	}
+
+	.gacha-data-container {
+		position: static;
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 100%;
+		order: -1;
+	}
+
+	.gacha-container {
+		width: 100%;
+		margin-left: 0;
+		order: 1;
+	}
+
+	.gacha-grid {
+		grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+		gap: 6px;
+		padding: 6px;
+	}
+
+	.gacha-banner-button {
+		margin-top: 10px;
+		height: 28px;
+		opacity: 50%;
+	}
+
+	.gacha-banner-button .nav-icon {
+		display: inline-block;
+		font-size: 24px;
+		line-height: 1;
+		margin-bottom: 4px;
+	}
+
+	.gacha-banner-button .nav-text {
+		display: none;
+	}
+
+	.gacha-banner-button {
+		justify-content: center;
+	}
+
+	.gacha-container .top-section {
+		padding: 4px;
+	}
+
+	.user-search-container {
+		display: block;
+	}
+}

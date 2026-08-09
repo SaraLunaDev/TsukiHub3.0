@@ -1,0 +1,34 @@
+.emote-icon {
+	height: 24px;
+	width: auto;
+}
+
+.emotes-container {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.emotes-container.has-chevron {
+	padding-right: 36px;
+}
+
+.emotes-expand-btn,
+.emotes-collapse-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	vertical-align: middle;
+	display: inline-flex;
+	align-items: flex-start;
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-left: 0;
+	height: 32px;
+	width: 32px;
+	justify-content: center;
+}

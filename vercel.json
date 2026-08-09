@@ -1,0 +1,36 @@
+{
+	"version": 2,
+	"functions": {
+		"api/**/*.js": {
+			"excludeFiles": "**/static/resources/**"
+		}
+	},
+	"rewrites": [
+		{
+			"source": "/assets/(.*)",
+			"destination": "https://api.tsuki-hub.com/assets/$1"
+		}
+	],
+	"routes": [
+		{
+			"src": "/favicon.ico",
+			"dest": "/favicon.ico"
+		},
+		{
+			"src": "/api/(.*)",
+			"dest": "/api/$1"
+		},
+		{
+			"src": "/static/(.*)",
+			"dest": "/static/$1"
+		},
+		{
+			"src": "/img/(.*)",
+			"dest": "/img/$1"
+		},
+		{
+			"src": "/(.*)",
+			"dest": "/index.html"
+		}
+	]
+}

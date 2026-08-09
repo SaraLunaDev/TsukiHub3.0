@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#20262d" />
+		<meta name="description" content="Web para el canal de TsukiSoft" />
+
+		<title>TsukiHub</title>
+	</head>
+
+	<body>
+		<script>
+			try {
+				var darkMode = JSON.parse(localStorage.getItem("darkMode"));
+				if (darkMode === null || darkMode === undefined)
+					darkMode = true;
+				if (darkMode) {
+					document.body.classList.add("dark-mode");
+				} else {
+					document.body.classList.remove("dark-mode");
+				}
+			} catch (e) {}
+		</script>
+		<div id="root"></div>
+	</body>
+</html>

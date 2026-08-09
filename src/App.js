@@ -1,0 +1,91 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Inicio from "./components/pages/Inicio/Inicio";
+import Juegos from "./components/pages/Juegos/Juegos";
+import Pelis from "./components/pages/Pelis/Pelis";
+import Recomendar from "./components/pages/Recomendar/Recomendar";
+import Pokedex from "./components/pages/Pokedex/Pokedex";
+import Gacha from "./components/pages/Gacha/Gacha";
+import GameBoy from "./components/pages/GameBoy/GameBoy";
+import TTS from "./components/pages/TTS/TTS";
+import UserProfile from "./components/pages/UserProfile/UserProfile";
+import EditarItem from "./components/pages/EditarItem/EditarItem";
+import AnadirItem from "./components/pages/AnadirItem/AnadirItem";
+import { AuthProvider } from "./hooks/useAuth";
+import { RefreshProvider } from "./hooks/useRefresh";
+import "./App.css";
+
+function App() {
+	return (
+		<AuthProvider>
+			<RefreshProvider>
+				<Router>
+					{}
+					<Layout>
+						{}
+						<Routes>
+							{}
+							<Route path="/" element={<Inicio />} />
+
+							{}
+							<Route path="/juegos" element={<Juegos />} />
+							<Route
+								path="/juegos/recomendar"
+								element={<Recomendar />}
+							/>
+							<Route
+								path="/juegos/anadir"
+								element={<AnadirItem />}
+							/>
+							<Route
+								path="/juegos/editar/:id"
+								element={<EditarItem />}
+							/>
+							<Route path="/pelis" element={<Pelis />} />
+							<Route
+								path="/pelis/recomendar"
+								element={<Recomendar />}
+							/>
+							<Route
+								path="/pelis/anadir"
+								element={<AnadirItem />}
+							/>
+							<Route
+								path="/pelis/editar/:id"
+								element={<EditarItem />}
+							/>
+
+							{}
+							<Route path="/pokedex" element={<Pokedex />} />
+							<Route
+								path="/pokedex/:region"
+								element={<Pokedex />}
+							/>
+
+							{}
+							<Route path="/gacha" element={<Gacha />} />
+							<Route path="/gacha/:banner" element={<Gacha />} />
+
+							{}
+							<Route path="/gameboy" element={<GameBoy />} />
+
+							{}
+							<Route path="/tts" element={<TTS />} />
+
+							{}
+							<Route
+								path="/user/:username"
+								element={<UserProfile />}
+							/>
+
+							{}
+						</Routes>{" "}
+					</Layout>
+				</Router>
+			</RefreshProvider>
+		</AuthProvider>
+	);
+}
+
+export default App;
