@@ -138,8 +138,26 @@
 	line-height: 1.2 !important;
 	margin: 0;
 	flex: 1;
-	overflow: hidden;
-	mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+	min-height: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 6px;
+	pointer-events: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+.item-imagen-resumen::-webkit-scrollbar {
+	width: 4px;
+}
+
+.item-imagen-resumen::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 4px;
+}
+
+.item-imagen-resumen::-webkit-scrollbar-track {
+	background: transparent;
 }
 
 .item-imagen-comentario {

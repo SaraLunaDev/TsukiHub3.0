@@ -95,90 +95,139 @@ export default function ItemImagen({
 	return (
 		<>
 			<div className="item-imagen-wrapper">
-			{isAdmin && itemId && (
-				<button
-					className="item-imagen-edit-btn"
-					onClick={handleEdit}
-					aria-label="Editar item"
-				>
-					<MaterialSymbolsEdit />
-				</button>
-			)}
-			{isAdmin && itemId && (
-				<button
-					className="item-imagen-delete-btn"
-					onClick={handleDelete}
-					disabled={deleting}
-					aria-label="Eliminar item"
-				>
-					<MaterialSymbolsClose />
-				</button>
-			)}
-			<img
-				src={Imagen}
-				alt={Nombre ? `Imagen de ${nombrePrincipal}` : "Item"}
-				className="item-imagen-img"
-			/>
-			<div className="item-imagen-overlay" />
-			<div className="item-imagen-content-caratula">
-				<div className="item-imagen-content-main">
-					<header className="item-imagen-header">
-						{nombrePrincipal && (
-							<h2 className="item-imagen-nombre">
-								{nombrePrincipal}
-							</h2>
-						)}
-						{nombreSecundario && (
-							<div className="item-imagen-nombre-secundario">
-								{nombreSecundario}
-							</div>
-						)}
-						{(Fecha_Salida ||
-							tipoSinParentesis ||
-							Creador ||
-							Duracion) && (
-							<div className="item-imagen-fecha-tipo">
-								{tipoSinParentesis && (
-									<span>{tipoSinParentesis}</span>
-								)}
-								{tipoSinParentesis && Fecha_Salida && (
-									<span> · </span>
-								)}
-								{Fecha_Salida && <span>{Fecha_Salida}</span>}
-								{Fecha_Salida && Duracion && <span> · </span>}
-								{Duracion && <span>{Duracion}</span>}
-								{(Fecha_Salida ||
-									tipoSinParentesis ||
-									Duracion) &&
-									Creador && (
-										<span className="item-imagen-creador-sep">
-											{" "}
-											·{" "}
+				{isAdmin && itemId && (
+					<button
+						className="item-imagen-edit-btn"
+						onClick={handleEdit}
+						aria-label="Editar item"
+					>
+						<MaterialSymbolsEdit />
+					</button>
+				)}
+				{isAdmin && itemId && (
+					<button
+						className="item-imagen-delete-btn"
+						onClick={handleDelete}
+						disabled={deleting}
+						aria-label="Eliminar item"
+					>
+						<MaterialSymbolsClose />
+					</button>
+				)}
+				<img
+					src={Imagen}
+					alt={Nombre ? `Imagen de ${nombrePrincipal}` : "Item"}
+					className="item-imagen-img"
+				/>
+				<div className="item-imagen-overlay" />
+				<div className="item-imagen-content-caratula">
+					<div className="item-imagen-content-main">
+						<header className="item-imagen-header">
+							{nombrePrincipal && (
+								<h2 className="item-imagen-nombre">
+									{nombrePrincipal}
+								</h2>
+							)}
+							{nombreSecundario && (
+								<div className="item-imagen-nombre-secundario">
+									{nombreSecundario}
+								</div>
+							)}
+							{(Fecha_Salida ||
+								tipoSinParentesis ||
+								Creador ||
+								Duracion) && (
+								<div className="item-imagen-fecha-tipo">
+									{tipoSinParentesis && (
+										<span>{tipoSinParentesis}</span>
+									)}
+									{tipoSinParentesis && Fecha_Salida && (
+										<span> · </span>
+									)}
+									{Fecha_Salida && (
+										<span>{Fecha_Salida}</span>
+									)}
+									{Fecha_Salida && Duracion && (
+										<span> · </span>
+									)}
+									{Duracion && <span>{Duracion}</span>}
+									{(Fecha_Salida ||
+										tipoSinParentesis ||
+										Duracion) &&
+										Creador && (
+											<span className="item-imagen-creador-sep">
+												{" "}
+												·{" "}
+											</span>
+										)}
+									{Creador && (
+										<span className="item-imagen-creador">
+											{Creador}
 										</span>
 									)}
-								{Creador && (
-									<span className="item-imagen-creador">
-										{Creador}
+								</div>
+							)}
+						</header>
+
+						{Resumen && (
+							<p className="item-imagen-resumen">{Resumen}</p>
+						)}
+						{Usuario && Comentario && (
+							<div
+								className="item-imagen-comentario"
+								style={{
+									marginTop: 8,
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "flex-start",
+									gap: 4,
+								}}
+							>
+								<div
+									style={{
+										display: "flex",
+										alignItems: "center",
+										gap: 8,
+									}}
+								>
+									{userSheet && userSheet.pfp ? (
+										<img
+											src={userSheet.pfp}
+											alt={
+												userSheet?.nombre ||
+												(Usuario &&
+													String(Usuario).trim()) ||
+												"Usuario"
+											}
+											className="item-usuario-avatar"
+											style={{
+												width: 18,
+												height: 18,
+												borderRadius: "50%",
+												marginRight: 6,
+												verticalAlign: "middle",
+											}}
+										/>
+									) : null}
+									<span style={{ fontWeight: "bold" }}>
+										{userSheet?.nombre ||
+											(Usuario &&
+												String(Usuario).trim()) ||
+											"Usuario"}
+										:
 									</span>
-								)}
+								</div>
+								<span
+									style={{
+										color: "var(--text-2)",
+										marginTop: 2,
+									}}
+								>
+									{Comentario}
+								</span>
 							</div>
 						)}
-					</header>
-
-					{Resumen && (
-						<p className="item-imagen-resumen">{Resumen}</p>
-					)}
-					{Usuario && Comentario && (
-						<div
-							className="item-imagen-comentario"
-							style={{
-								marginTop: 8,
-								display: "flex",
-								flexDirection: "column",
-								alignItems: "flex-start",
-								gap: 4,
-							}}
-						>
+						<footer className="item-imagen-footer">
 							<div
 								style={{
 									display: "flex",
@@ -186,169 +235,141 @@ export default function ItemImagen({
 									gap: 8,
 								}}
 							>
-								{userSheet && userSheet.pfp ? (
-									<img
-										src={userSheet.pfp}
-										alt={
-											userSheet?.nombre ||
-											(Usuario &&
-												String(Usuario).trim()) ||
-											"Usuario"
-										}
-										className="item-usuario-avatar"
+								{itemId && (
+									<button
+										className="item-imagen-trailer-btn"
+										onClick={handleVerMas}
+									>
+										<IconamoonInformationCircleBold
+											style={{
+												fontSize: 18,
+												marginRight: 6,
+											}}
+										/>
+										Ver más
+									</button>
+								)}
+								{Trailer && (
+									<button
+										className="item-imagen-trailer-btn"
+										onClick={(e) => {
+											e.stopPropagation();
+											window.open(Trailer, "_blank");
+										}}
+									>
+										<MaterialSymbolsPlayArrowRounded
+											style={{
+												fontSize: 18,
+												marginRight: 6,
+											}}
+										/>
+										Ver Trailer
+									</button>
+								)}
+								<span className="item-imagen-nota-global">
+									<MaterialSymbolsLightKidStar
+										className="item-imagen-nota-estrella"
 										style={{
-											width: 18,
-											height: 18,
-											borderRadius: "50%",
-											marginRight: 6,
+											fontSize: 18,
 											verticalAlign: "middle",
+											marginRight: 2,
+											marginTop: 2,
 										}}
 									/>
-								) : null}
-								<span style={{ fontWeight: "bold" }}>
-									{userSheet?.nombre ||
-										(Usuario && String(Usuario).trim()) ||
-										"Usuario"}
-									:
+									<span className="item-imagen-nota-texto">
+										{Nota_Global
+											? Number(
+													Number(Nota_Global).toFixed(
+														2,
+													),
+												).toString()
+											: "N/A"}{" "}
+										<span className="item-imagen-nota-fuente">
+											{(() => {
+												const tipoNorm = (
+													tipoSinParentesis || ""
+												)
+													.normalize("NFD")
+													.replace(
+														/\p{Diacritic}/gu,
+														"",
+													)
+													.trim()
+													.toLowerCase();
+												return [
+													"pelicula",
+													"serie",
+												].includes(tipoNorm)
+													? "IMDB"
+													: "IGDB";
+											})()}
+										</span>
+									</span>
 								</span>
 							</div>
-							<span
-								style={{ color: "var(--text-2)", marginTop: 2 }}
-							>
-								{Comentario}
-							</span>
+							{Generos && (
+								<div className="item-imagen-generos">
+									{Generos.split(",").map((g, i) => (
+										<span
+											key={i}
+											className="item-imagen-genero"
+										>
+											{g.trim()}
+										</span>
+									))}
+								</div>
+							)}
+						</footer>
+					</div>
+					{Caratula && (
+						<div className="item-imagen-caratula-container">
+							{" "}
+							<img
+								src={Caratula}
+								alt="Carátula"
+								className="item-imagen-caratula"
+							/>
 						</div>
 					)}
-					<footer className="item-imagen-footer">
+				</div>
+			</div>
+			{showVerItem && (
+				<React.Suspense
+					fallback={
 						<div
 							style={{
+								position: "fixed",
+								inset: 0,
+								zIndex: 9999,
+								background: "rgba(0,0,0,0.78)",
 								display: "flex",
 								alignItems: "center",
-								gap: 8,
+								justifyContent: "center",
 							}}
 						>
-						{itemId && (
-							<button
-								className="item-imagen-trailer-btn"
-								onClick={handleVerMas}
-							>
-								<IconamoonInformationCircleBold
-									style={{ fontSize: 16, marginRight: 4 }}
-								/>
-								Ver más
-							</button>
-						)}
-						{Trailer && (
-							<button
-								className="item-imagen-trailer-btn"
-								onClick={(e) => {
-									e.stopPropagation();
-									window.open(Trailer, "_blank");
+							<div
+								style={{
+									background: "var(--row-bg)",
+									borderRadius: 12,
+									padding: 48,
+									border: "1px solid var(--border)",
+									textAlign: "center",
+									color: "var(--text-2)",
+									fontSize: 14,
 								}}
 							>
-								<MaterialSymbolsPlayArrowRounded
-									style={{ fontSize: 18, marginRight: 4 }}
-								/>
-								Ver Trailer
-							</button>
-						)}
-							<span className="item-imagen-nota-global">
-								<MaterialSymbolsLightKidStar
-									className="item-imagen-nota-estrella"
-									style={{
-										fontSize: 18,
-										verticalAlign: "middle",
-										marginRight: 2,
-										marginTop: 2,
-									}}
-								/>
-								<span className="item-imagen-nota-texto">
-									{Nota_Global
-										? Number(
-												Number(Nota_Global).toFixed(2),
-											).toString()
-										: "N/A"}{" "}
-									<span className="item-imagen-nota-fuente">
-										{(() => {
-											const tipoNorm = (
-												tipoSinParentesis || ""
-											)
-												.normalize("NFD")
-												.replace(/\p{Diacritic}/gu, "")
-												.trim()
-												.toLowerCase();
-											return [
-												"pelicula",
-												"serie",
-											].includes(tipoNorm)
-												? "IMDB"
-												: "IGDB";
-										})()}
-									</span>
-								</span>
-							</span>
-						</div>
-						{Generos && (
-							<div className="item-imagen-generos">
-								{Generos.split(",").map((g, i) => (
-									<span
-										key={i}
-										className="item-imagen-genero"
-									>
-										{g.trim()}
-									</span>
-								))}
+								Cargando...
 							</div>
-						)}
-					</footer>
-				</div>
-				{Caratula && (
-					<div className="item-imagen-caratula-container">					<img
-						src={Caratula}
-						alt="Carátula"
-						className="item-imagen-caratula"
-					/>
-				</div>
-			)}
-		</div>
-		</div>
-		{showVerItem && (
-			<React.Suspense
-				fallback={
-					<div
-						style={{
-							position: "fixed",
-							inset: 0,
-							zIndex: 9999,
-							background: "rgba(0,0,0,0.78)",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
-						<div
-							style={{
-								background: "var(--row-bg)",
-								borderRadius: 12,
-								padding: 48,
-								border: "1px solid var(--border)",
-								textAlign: "center",
-								color: "var(--text-2)",
-								fontSize: 14,
-							}}
-						>
-							Cargando...
 						</div>
-					</div>
-				}
-			>
-				<VerItem
-					id={itemId}
-					isJuegos={isJuegos}
-					onClose={() => setShowVerItem(false)}
-				/>
-			</React.Suspense>
-		)}
+					}
+				>
+					<VerItem
+						id={itemId}
+						isJuegos={isJuegos}
+						onClose={() => setShowVerItem(false)}
+					/>
+				</React.Suspense>
+			)}
 		</>
 	);
 }
