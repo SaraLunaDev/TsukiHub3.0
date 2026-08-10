@@ -22,6 +22,8 @@ import { GenshinImpact } from "../../icons/Gacha/GenshinImpact";
 import { MonsterHunter } from "../../icons/Gacha/MonsterHunter";
 import { OnePiece } from "../../icons/Gacha/OnePiece";
 import { SmashBros } from "../../icons/Gacha/SmashBros";
+import { MaterialSymbolsKidStar } from "../../icons/MaterialSymbolsKidStar";
+import { MaterialSymbolsKidStarOutline } from "../../icons/MaterialSymbolsKidStarOutline";
 import "../../common/UserSearch/UserSearch.css";
 import "./Gacha.css";
 
@@ -35,6 +37,38 @@ const BANNER_ICONS = {
 	OnePiece,
 	SmashBros,
 };
+
+function buildTieredGrid(chars, renderItem) {
+	return chars.reduce((result, char, index, arr) => {
+		const prev = index > 0 ? arr[index - 1] : null;
+		const elements = [];
+		if (!prev || prev.tier !== char.tier) {
+			const tier = Math.min(5, Math.max(0, Number(char.tier) || 0));
+			elements.push(
+				<div
+					key={`divider-${index}`}
+					className="gacha-tier-divider"
+				>
+					<hr />
+					<span className="gacha-tier-stars">
+						{Array.from({ length: tier }, (_, i) => (
+							<MaterialSymbolsKidStar key={`fill-${i}`} />
+						))}
+						{Array.from({ length: 5 - tier }, (_, i) => (
+							<MaterialSymbolsKidStarOutline
+								key={`outline-${i}`}
+							/>
+						))}
+					</span>
+					<hr />
+				</div>,
+			);
+		}
+		elements.push(renderItem(char, index));
+		result.push(...elements);
+		return result;
+	}, []);
+}
 
 function Gacha() {
 	const { banner } = useParams();
@@ -343,13 +377,13 @@ function Gacha() {
 			pfp:
 				u.imagen_perfil ||
 				`https://decapi.me/twitch/avatar/${u.nombre}`,
-			personajes: u.personajes,
+			cartas: u.cartas,
 		}));
 	}, [leaderboardUsers]);
 
 	const currentUser = users.find((u) => u.id === selectedUser);
 	const currentUserName = currentUser?.nombre || "Usuario";
-	const totalOwnedGlobal = currentUser?.personajes || 0;
+	const totalOwnedGlobal = currentUser?.cartas || 0;
 
 	const currentCartas = useMemo(() => {
 		const cacheKey = `${selectedUser}_${activeBanner}`;
@@ -582,62 +616,34 @@ function Gacha() {
 								</div>
 							)}
 							{cartasLoading
-								? Array.from(
-										{
-											length: totalCharactersBanner || 1,
-										},
-										(_, i) => (
-											<div
-												key={`skel-${i}`}
-												className="gacha-card-skeleton"
+								? characters.length > 0
+									? buildTieredGrid(
+											characters,
+											(_, index) => (
+												<div
+													key={`skel-${index}`}
+													className="gacha-card-skeleton"
+												/>
+											),
+										)
+									: Array.from(
+											{ length: 1 },
+											(_, i) => (
+												<div
+													key={`skel-${i}`}
+													className="gacha-card-skeleton"
+												/>
+											),
+										)
+								: buildTieredGrid(
+										characterGrid,
+										(char, index) => (
+											<GachaCard
+												key={`${char.id}-${index}`}
+												character={char}
+												onClick={handleCharacterClick}
 											/>
 										),
-									)
-								: characterGrid.reduce(
-										(result, char, index, arr) => {
-											const prev =
-												index > 0
-													? arr[index - 1]
-													: null;
-											const elements = [];
-											if (
-												prev &&
-												prev.tier !== char.tier
-											) {
-												const stars =
-													"★★★★★☆☆☆☆☆".slice(
-														0,
-														Number(char.tier),
-													) +
-													"☆☆☆☆☆".slice(
-														0,
-														5 - Number(char.tier),
-													);
-												elements.push(
-													<div
-														key={`divider-${index}`}
-														className="gacha-tier-divider"
-													>
-														<hr />
-														<span className="gacha-tier-stars">
-															{stars}
-														</span>
-													</div>,
-												);
-											}
-											elements.push(
-												<GachaCard
-													key={`${char.id}-${index}`}
-													character={char}
-													onClick={
-														handleCharacterClick
-													}
-												/>,
-											);
-											result.push(...elements);
-											return result;
-										},
-										[],
 									)}
 						</div>
 					</div>

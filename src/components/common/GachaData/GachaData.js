@@ -14,13 +14,23 @@ function GachaData({
 
 	return (
 		<div className="gacha-data normal-section">
-			<div className="gacha-stats-row">
-				<span>
-					<b>{ownedCount}</b> / <b>{totalCharacters}</b> personajes
-				</span>
-				<span>
-					{tier5Count} - <b>5★</b>
-				</span>
+			<div className="region-stats">
+				<div className="region-stats-box header-box">
+					<div className="region-stat-item">
+						<span className="region-stat-label">Banner:</span>
+						<span className="region-stat-value">
+							<b>
+								{ownedCount}/{totalCharacters}
+							</b>
+						</span>
+					</div>
+					<div className="region-stat-item">
+						<span className="region-stat-label">Tier 5:</span>
+						<span className="region-stat-value">
+							<b>{tier5Count}</b>
+						</span>
+					</div>
+				</div>
 			</div>
 			<div className="gacha-display-section">
 				<HoverCard

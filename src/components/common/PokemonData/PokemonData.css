@@ -57,9 +57,11 @@
 .pokemon-display-img {
 	width: 124px;
 	height: 124px;
+	max-width: 100%;
 	object-fit: contain;
 	image-rendering: pixelated;
-	flex-shrink: 0;
+	flex-shrink: 1;
+	min-width: 0;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -69,8 +71,8 @@
 	flex-direction: column;
 	gap: 2px;
 	min-width: 0;
-	flex: 0 1 auto;
-	max-width: 260px;
+	width: 140px;
+	flex-shrink: 0;
 }
 
 .pokemon-display-info .pokemon-name-types {
@@ -110,7 +112,7 @@
 .pokemon-moves {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 8px;
 	padding-top: 8px;
 	min-width: 0;
 }

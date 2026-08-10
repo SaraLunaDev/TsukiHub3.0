@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { RATE_LIMIT_MSG, API_STATUS_ERROR_MSG } from "../constants";
 
 const MIN_LOADING_MS = 600;
-const CACHE_TTL_MS = 60_000;
+const CACHE_TTL_MS = 20_000;
 
 const apiCache = new Map();
 const fetchPromises = new Map();

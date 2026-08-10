@@ -19,6 +19,7 @@ const UserRanking = ({
 	const getCount = (user) => {
 		if (user.pokemons !== undefined) return user.pokemons;
 		if (user.personajes !== undefined) return user.personajes;
+		if (user.cartas !== undefined) return user.cartas;
 		if (pokemonCount) return pokemonCount.get(String(user.id)) || 0;
 		return 0;
 	};

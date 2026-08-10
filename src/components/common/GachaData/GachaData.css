@@ -7,22 +7,44 @@
 	min-height: 413px;
 }
 
-.gacha-stats-row {
+.region-stats {
+	margin-top: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.region-stats-box {
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.region-stats-box.header-box {
+	padding-top: 0;
+}
+
+.region-stat-item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px;
 	font-size: 14px;
-	color: var(--text-2);
-	border-bottom: 1px solid var(--border);
 }
 
-.gacha-stats-row b {
-	font-weight: 600;
+.region-stat-label {
+	color: var(--text-2);
+	margin-right: 4px;
+}
+
+.region-stat-value {
+	color: var(--text-2);
 }
 
 .gacha-display-section {
 	padding: 6px 16px;
+	border-top: 1px solid var(--border);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
