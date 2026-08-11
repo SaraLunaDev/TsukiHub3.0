@@ -84,6 +84,16 @@ export const parseSlashDate = (d) => {
 
 export const createItemSorter = (order) => (a, b) => {
 	switch (order) {
+		case "votes-desc":
+			return (
+				(Number(b.votos_count) || 0) -
+				(Number(a.votos_count) || 0)
+			);
+		case "votes-asc":
+			return (
+				(Number(a.votos_count) || 0) -
+				(Number(b.votos_count) || 0)
+			);
 		case "asc":
 			return (
 				parseSlashDate(a.fecha || a.Fecha) -

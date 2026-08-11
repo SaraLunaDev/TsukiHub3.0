@@ -12,7 +12,12 @@ const TABS = [
 	{ id: "enlaces", label: "Enlaces" },
 	{ id: "streamer", label: "Streamer" },
 ];
-export default function VerItem({ id, onClose, isJuegos: propIsJuegos }) {
+	export default function VerItem({
+		id,
+		onClose,
+		isJuegos: propIsJuegos,
+		onVote,
+	}) {
 	const { user, token, isAdmin } = useAuth();
 	const fetchedRef = useRef(null);
 
@@ -150,8 +155,10 @@ export default function VerItem({ id, onClose, isJuegos: propIsJuegos }) {
 			if (resp.ok) {
 				const data = await resp.json();
 				const voted = data.activo;
+				const newCount = voted ? votes + 1 : Math.max(0, votes - 1);
 				setHasVoted(voted);
-				setVotes((v) => (voted ? v + 1 : Math.max(0, v - 1)));
+				setVotes(newCount);
+				if (onVote) onVote(newCount, voted);
 			}
 		} catch (err) {
 			console.error(err);

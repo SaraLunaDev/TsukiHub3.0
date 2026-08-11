@@ -15,61 +15,6 @@ import { Fa7SolidThumbsUp } from "../../icons/Fa7SolidThumbsUp";
 
 const VerItem = React.lazy(() => import("../../pages/VerItem/VerItem"));
 
-const countsCache = new Map();
-const voteListsCache = new Map();
-const fetchPromises = new Map();
-
-export async function fetchVotes(
-	tipo,
-	userId,
-	{ skipCache } = { skipCache: false },
-) {
-	const cachedCounts = countsCache.get(tipo);
-	const cachedVotes = voteListsCache.get(tipo);
-
-	const computeUserSet = (votes) => {
-		if (!userId) return null;
-		const set = new Set();
-		for (const vote of votes || []) {
-			const vUserId = String(vote.usuario_id || vote.Usuario || "");
-			const vId = String(vote.item_id || vote.ID || vote.id || "");
-			if (vUserId === String(userId) && vId) set.add(vId);
-		}
-		return set;
-	};
-
-	if (cachedCounts && (!userId || cachedVotes) && !skipCache) {
-		return { counts: cachedCounts, userSet: computeUserSet(cachedVotes) };
-	}
-
-	const key = userId ? `${tipo}:${userId}` : tipo;
-	if (fetchPromises.has(key)) return fetchPromises.get(key);
-
-	const makeRequest = async () => {
-		const resp = await fetch(`/api/votos`);
-		if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-		const allVotes = await resp.json();
-		const votes = Array.isArray(allVotes)
-			? allVotes.filter(
-					(v) => String(v.activo || "").toUpperCase() === "TRUE",
-				)
-			: [];
-		const counts = new Map();
-		for (const vote of votes) {
-			const id = String(vote.item_id || vote.itemId || "");
-			if (id) counts.set(id, (counts.get(id) || 0) + 1);
-		}
-		countsCache.set(tipo, counts);
-		voteListsCache.set(tipo, votes);
-		const userSet = computeUserSet(votes);
-		return { counts, userSet };
-	};
-
-	const promise = makeRequest();
-	fetchPromises.set(key, promise);
-	promise.finally(() => fetchPromises.delete(key));
-	return promise;
-}
 export default function ItemCaratula({
 	Caratula,
 	Nombre,
@@ -445,6 +390,12 @@ export default function ItemCaratula({
 						id={itemId}
 						isJuegos={isJuegos}
 						onClose={() => setShowVerItem(false)}
+						onVote={(newCount, voted) => {
+							setVotes(newCount);
+							setHasVoted(voted);
+							if (onVote && !isOwnRecommendation)
+								onVote(String(itemId), newCount, voted);
+						}}
 					/>
 				</Suspense>
 			)}

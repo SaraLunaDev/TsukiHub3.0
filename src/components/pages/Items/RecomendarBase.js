@@ -9,6 +9,7 @@ import {
 	getRowId,
 	normalizeItemRow,
 	parseDuration,
+	createItemSorter,
 } from "../../../utils/itemHelpers";
 import "../Recomendar/Recomendar.css";
 import "./Items.css";
@@ -203,6 +204,28 @@ function RecomendarBase({ config }) {
 		useState("");
 	const [enviando, setEnviando] = useState(false);
 	const [errorEnvio, setErrorEnvio] = useState("");
+
+	const handleVote = useCallback(
+		(id, newCount, voted) => {
+			clearApiCache(endpointBase);
+			setItems((prev) => {
+				const next = prev.map((item) => {
+					if (String(item.id) === String(id)) {
+						return {
+							...item,
+							votos_count: newCount,
+							...(voted !== undefined
+								? { has_voted: voted }
+								: {}),
+						};
+					}
+					return item;
+				});
+				return [...next].sort(createItemSorter(order));
+			});
+		},
+		[order, endpointBase],
+	);
 
 	const { labels } = config;
 
@@ -512,19 +535,26 @@ function RecomendarBase({ config }) {
 											{labels.duplicateMessage}
 										</div>
 										<div className="inset-section">
-											<ItemCaratula
-												{...normalizeItemRow(
-													existingMatch,
-												)}
-												userSheet={{
-													nombre:
-														existingMatch.usuario_nombre ||
-														"",
-													pfp:
-														existingMatch.usuario_imagen_perfil ||
-														"",
-												}}
-												onRecommendationDeleted={(
+										<ItemCaratula
+											{...normalizeItemRow(
+												existingMatch,
+											)}
+											voteCount={
+												existingMatch.votos_count || 0
+											}
+											hasVotedInitial={
+												existingMatch.has_voted || false
+											}
+											onVote={handleVote}
+											userSheet={{
+												nombre:
+													existingMatch.usuario_nombre ||
+													"",
+												pfp:
+													existingMatch.usuario_imagen_perfil ||
+													"",
+											}}
+											onRecommendationDeleted={(
 													deletedId,
 												) => {
 													setItems((prev) =>
@@ -753,30 +783,7 @@ function RecomendarBase({ config }) {
 											pfp:
 												row.usuario_imagen_perfil || "",
 										}}
-										onVote={(id, newCount, voted) => {
-											setItems((prev) =>
-												prev.map((item) => {
-													if (
-														String(item.id) ===
-														String(id)
-													) {
-														return {
-															...item,
-															votos_count:
-																newCount,
-															...(voted !==
-															undefined
-																? {
-																		has_voted:
-																			voted,
-																	}
-																: {}),
-														};
-													}
-													return item;
-												}),
-											);
-										}}
+										onVote={handleVote}
 										onRecommendationDeleted={(
 											deletedId,
 										) => {
@@ -793,7 +800,7 @@ function RecomendarBase({ config }) {
 											clearApiCache(endpointBase);
 											loadItems(0, false, true);
 										}}
-									/>
+										/>
 								))}
 							</div>
 							{itemsLoadingMoreUI && (
