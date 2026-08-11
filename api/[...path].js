@@ -51,6 +51,9 @@ export default async function handler(req, res) {
 
 		const originalPath = getOriginalPath(req);
 		const headers = { "X-API-Key": API_KEY };
+		if (req.headers["x-forwarded-for"]) {
+			headers["X-Forwarded-For"] = req.headers["x-forwarded-for"];
+		}
 
 		if (req.headers["x-user-token"]) {
 			headers["X-User-Token"] = req.headers["x-user-token"];
