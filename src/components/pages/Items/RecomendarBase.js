@@ -221,11 +221,20 @@ function RecomendarBase({ config }) {
 					}
 					return item;
 				});
-				return [...next].sort(createItemSorter(order));
+				return [...next].sort(
+					createItemSorter(order, { notaField: "nota_global" }),
+				);
 			});
 		},
 		[order, endpointBase],
 	);
+
+	const displayedItems = useMemo(() => {
+		if (order !== "nota-desc" && order !== "nota-asc") return items;
+		return [...items].sort(
+			createItemSorter(order, { notaField: "nota_global" }),
+		);
+	}, [items, order]);
 
 	const { labels } = config;
 
@@ -769,10 +778,10 @@ function RecomendarBase({ config }) {
 						>
 							<LoadingRing width={28} height={28} />
 						</div>
-					) : items.length > 0 ? (
+					) : displayedItems.length > 0 ? (
 						<>
 							<div className={config.gridClass}>
-								{items.map((row, idx) => (
+								{displayedItems.map((row, idx) => (
 									<ItemCaratula
 										key={getRowId(row) || idx}
 										{...normalizeItemRow(row)}

@@ -82,7 +82,15 @@ export const parseSlashDate = (d) => {
 	return new Date(year, month - 1, day).getTime();
 };
 
-export const createItemSorter = (order) => (a, b) => {
+const notaOf = (row, field) => {
+	const capital = field.charAt(0).toUpperCase() + field.slice(1);
+	return row?.[field] ?? row?.[capital];
+};
+
+export const createItemSorter = (order, { notaField = "nota" } = {}) => (
+	a,
+	b,
+) => {
 	switch (order) {
 		case "votes-desc":
 			return (
@@ -109,13 +117,13 @@ export const createItemSorter = (order) => (a, b) => {
 			);
 		case "nota-desc":
 			return (
-				(Number(b.nota || b.Nota) || 0) -
-				(Number(a.nota || a.Nota) || 0)
+				(Number(notaOf(b, notaField)) || 0) -
+				(Number(notaOf(a, notaField)) || 0)
 			);
 		case "nota-asc":
 			return (
-				(Number(a.nota || a.Nota) || 0) -
-				(Number(b.nota || b.Nota) || 0)
+				(Number(notaOf(a, notaField)) || 0) -
+				(Number(notaOf(b, notaField)) || 0)
 			);
 		case "duracion-desc":
 			return (
