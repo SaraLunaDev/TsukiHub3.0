@@ -52,7 +52,6 @@
 	object-fit: contain;
 	transition: opacity 0.2s;
 	opacity: 0;
-	image-rendering: pixelated;
 }
 
 .pokemon-img.loaded {
