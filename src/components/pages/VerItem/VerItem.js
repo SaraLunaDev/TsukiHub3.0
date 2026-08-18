@@ -137,8 +137,11 @@ const TABS = [
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
+	const isOwnRecommendation =
+		user && item && String(item.usuario_id) === String(user.id);
+
 	const handleVote = async () => {
-		if (!user || voting) return;
+		if (!user || voting || isOwnRecommendation) return;
 		setVoting(true);
 		try {
 			const resp = await fetch("/api/votos/toggle", {
@@ -570,17 +573,21 @@ const TABS = [
 																		handleVote
 																	}
 																	disabled={
-																		voting
+																		voting || isOwnRecommendation
 																	}
 																	aria-label={
-																		hasVoted
-																			? "Votado"
-																			: "Votar"
+																		isOwnRecommendation
+																			? "No puedes votar tu propia recomendación"
+																			: hasVoted
+																				? "Votado"
+																				: "Votar"
 																	}
 																	title={
-																		hasVoted
-																			? "Votado"
-																			: "Votar"
+																		isOwnRecommendation
+																			? "No puedes votar tu propia recomendación"
+																			: hasVoted
+																				? "Votado"
+																				: "Votar"
 																	}
 																>
 																	<Fa7SolidThumbsUp
